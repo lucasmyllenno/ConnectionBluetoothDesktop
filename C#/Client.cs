@@ -16,7 +16,7 @@ namespace ConsoleAdapterBluetooth
     {
 		private Guid UUID;
 		private String PIN;
-        private BluetoothAddress bluetoothAddress;
+        	private BluetoothAddress bluetoothAddress;
 		private BluetoothClient bluetoothClient;
 		
 		private String stringSend;
@@ -25,7 +25,7 @@ namespace ConsoleAdapterBluetooth
 		public Client()
 		{
 			UUID = new Guid("00000000-0000-0000-0000-000000000000");
-            PIN = "1234";
+	            	PIN = "1234";
 			
 			bluetoothAddress = getMacAddress();
 		}
@@ -37,20 +37,20 @@ namespace ConsoleAdapterBluetooth
 				if (serverToSend.Authenticated)
 				{
 					bluetoothClient = new BluetoothClient();
-                    bluetoothClient.Connect(serverToSend.DeviceAddress, UUID);
+                    			bluetoothClient.Connect(serverToSend.DeviceAddress, UUID);
 					Console.WriteLine("Conexão Estabelecida!");
 
-                    Thread thread = new Thread(new ThreadStart(threadClientBluetooth));
-                    thread.Start();
+                    			Thread thread = new Thread(new ThreadStart(threadClientBluetooth));
+                    			thread.Start();
 				}
 				else
 				{
-                    Console.WriteLine("Servidor Não Autenticado!");
+                    			Console.WriteLine("Servidor Não Autenticado!");
 				}
 			}
 			catch (Exception e)
 			{
-                Console.WriteLine("Erro: " + e.ToString());
+                		Console.WriteLine("Erro: " + e.ToString());
 			}
 		}
 		
@@ -60,31 +60,31 @@ namespace ConsoleAdapterBluetooth
 			{
 				Stream stream = bluetoothClient.GetStream();
 
-                byte[] sent = Encoding.ASCII.GetBytes(stringSend);
-                stream.Write(sent, 0, sent.Length);
-                stream.Flush();
+		                byte[] sent = Encoding.ASCII.GetBytes(stringSend);
+		                stream.Write(sent, 0, sent.Length);
+		                stream.Flush();
 
-                Console.WriteLine("Mensagem Enviada!");
+                		Console.WriteLine("Mensagem Enviada!");
 			}
 			catch (Exception e)
 			{
-                Console.WriteLine("Erro: " + e.ToString());
+                		Console.WriteLine("Erro: " + e.ToString());
 			}
 		}
 		
 		public BluetoothAddress getMacAddress()
 		{
-            BluetoothRadio bluetoothRadio = BluetoothRadio.PrimaryRadio;
-            BluetoothAddress bluetoothAddress = bluetoothRadio.LocalAddress;
-            return bluetoothAddress;
+		         BluetoothRadio bluetoothRadio = BluetoothRadio.PrimaryRadio;
+		         BluetoothAddress bluetoothAddress = bluetoothRadio.LocalAddress;
+		         return bluetoothAddress;
 		}
 		
 		public void close()
-        {
-            bluetoothClient.Close();
-            bluetoothClient.Dispose();
-            Console.WriteLine("Conexão terminada!");
-        }
+        	{
+            		bluetoothClient.Close();
+            		bluetoothClient.Dispose();
+            		Console.WriteLine("Conexão terminada!");
+        	}
 		
 		public void setStringSend(String status)
 		{
