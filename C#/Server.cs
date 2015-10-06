@@ -32,11 +32,8 @@ namespace ConsoleAdapterBluetooth
 	
 	                	Console.WriteLine("Aguardando Clientes..");
 	
-	                	if (bluetoothListener.Pending())
-	                	{
-	                		Thread thread = new Thread(new ThreadStart(readInfoClient));
-	                    		thread.Start();
-	                	}
+	                	Thread thread = new Thread(new ThreadStart(readInfoClient));
+	                    	thread.Start();
 	            	}
 	            	catch (Exception e)
 	            	{
